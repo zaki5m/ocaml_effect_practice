@@ -1,0 +1,2 @@
+# ocaml_effect_practice
+OCamlのエフェクトを使った練習用repository
