@@ -1,5 +1,6 @@
 # ocaml_effect_practice
 OCamlのエフェクトを使った練習用repository
+`src/`の中にライフゲームを作ることが最終目標！！
 
 ## OCamlのセットアップ
 
