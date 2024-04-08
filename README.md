@@ -54,6 +54,95 @@ REPLが動くか確認
 ocaml
 ```
 
+## OCamlの実行方法
+OCamlコードをコンパイルする方法はいくつかあるのですが，`dune`というbuildツールを使用しておかないと大きなものを作るときは面倒なので，初めからduneだけ使えるようになっておこう！
+
+### ライブラリのinstall(dune)
+まずは，duneをinstallしましょう
+
+```
+opam install dune
+```
+
+このほかにもライブラリをinstallするときは，`dune`の部分をライブラリ名に変えるとinstallできます．
+(ちょっといいREPLとしてutopを入れておくことをオススメします)
+
+### duneを用いたOCamlコードの実行①
+**buildを行う**
+```
+dune build
+```
+
+**実行する**
+```
+./_build/default/src/main.exe
+```
+
+### duneを用いたOCamlコードの実行②
+**buildと実行を行う**
+```
+dune exec main
+```
+
+⚠️この実行方法を行いたかったらduneの設定を若干ちゃんとする必要があります．
+
+### duneの書き方
+
+**dune**
+
+duneという名前のfileの中に，buildに関することを書く必要があります．
+
+また，duneという名前のfileは各ディレクトリにつき1つ必要です(これがクソ仕様なんだよな)
+
+executableから始まるものは実行するためのfileを指します．(今回はほとんどこれを使うと思います)
+
+testを書きたい場合はそのためのduneの書き方もあるのですが，今回は省略します.(後で追記するかも)
+
+
+以下にexcutableの要素について説明
+- name: 実行したいコードのroot fileの名前
+- modules: このコードを実行するために必要なmoduleの列挙(スペース区切りで)
+- public_name: `dune exec public_name`の部分を決めることができる．②の実行に必要．(省略可能)
+- libraries: 外部libraryを使用するときはここに列挙
+```
+(executable
+ (name main)
+ (modules main)
+ (public_name main))
+```
+
+**dune-project**
+
+プロジェクトのルートにdune-projectという名前のfileを作る必要がある
+
+中身については，基本的に1行記載していればok
+```
+(lang dune 3.0)
+```
+
+## Effectに関して
+
+[Deep Effect](https://github.com/zaki5m/blob/main/deep_example.ml)と[Shallow Effect](https://github.com/zaki5m/blob/main/shallow_example.ml)を使った，状態管理の例をそれぞれ`example/`においています．ぜひ参考にしてください．
+
+試しに，以下を実行して同じものが出るか確認してください．
+```
+dune build
+```
+
+```
+./_build/default/example/deep_example.exe
+1
+3
+```
+
+```
+./_build/default/example/shallow_example.exe
+1
+3
+```
+
+困ったことがあればなんでも聞いてください！
+
 ## 参照リンク集
 
 - duneに関しては大体ここを見れば解決!!(https://dune.readthedocs.io/en/stable/reference/dune/index.html)
