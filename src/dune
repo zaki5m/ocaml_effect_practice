@@ -1,4 +1,5 @@
 (executable
  (name main)
- (modules main)
- (public_name main))
+ (modules main life_game)
+ (public_name main)
+ (libraries unix))

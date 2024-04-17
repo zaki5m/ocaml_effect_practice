@@ -1,3 +1,3 @@
-let main = print_endline "Hello, World!"
+open Life_game
 
-let _ = main
+let _ = run life_game 30 30
